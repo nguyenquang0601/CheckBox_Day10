@@ -1,0 +1,129 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+<body>
+    <div class="inbox">
+      <div class="item">
+            <input type="checkbox">
+            <p class="tix">This is an inbox layout.</p>
+      </div>
+      <div class="item">
+        <input type="checkbox">
+        <p class="tix">Check one items</p>
+      </div>
+      <div class="item">
+        <input type="checkbox">
+        <p class="tix">Hold down Shift key</p>
+      </div>
+      <div class="item">
+        <input type="checkbox">
+        <p class="tix">This is the dog</p>
+      </div>
+      <div class="item">
+        <input type="checkbox">
+        <p class="tix">This is  the cat</p>
+      </div>
+      <div class="item">
+        <input type="checkbox">
+        <p class="tix">This is an inbox layout.</p>
+      </div>
+      <div class="item">
+        <input type="checkbox">
+        <p class="tix">Check one items</p>
+      </div>
+      <div class="item">
+        <input type="checkbox">
+        <p class="tix">Hold down Shift key</p>
+      </div>
+      <div class="item">
+        <input type="checkbox">
+        <p class="tix">This is the dog</p>
+      </div>
+      <div class="item">
+        <input type="checkbox">
+        <p class="tix">This is  the cat</p>
+      </div>
+    </div>
+    <style>
+      body,html{
+        background: #fffc28;
+        margin: 0;
+      }
+      .open{
+          text-decoration: line-through;
+      }
+      .item.non{
+          text-decoration: none;
+      }
+      .inbox{
+        background: cornsilk;
+        margin: 10% 20%;
+      }
+      .item{
+        margin: 0 30%;
+      }
+      input{
+        width: 10%;
+        min-height: 20px;
+        float: left;
+        /*margin: 10%;*/
+        align-items: center;
+        text-align: center;
+        margin-top: 1%;
+      }
+      p{
+        font-size: 20px;
+        width: 90%;
+      }
+    </style>
+    <script>
+      const  checkboxes = document.querySelectorAll('.inbox input[type ="checkbox"]');
+      console.log(checkboxes);
+      let lastChecked;
+
+      function Handlecheckbox(e){
+          let inBetween = false;
+
+          console.log(e.shiftKey);
+          console.log(this.checked);
+          if (e.shiftKey && this.checked){
+              checkboxes.forEach((checkbox1,index) => {
+                  if (checkbox1 === this  ||  checkbox1 === lastChecked){
+                      if (inBetween == true){
+                          $('.inbox .item:nth-child('+(index+1)+')').css('text-decoration','line-through');
+                      }
+                      inBetween = !inBetween;
+                  }
+
+                  if (inBetween){
+                      checkbox1.checked = true;
+                      $('.inbox .item:nth-child('+(index+1)+')').css('text-decoration','line-through');
+                  }
+              });
+          }
+          lastChecked = this;
+
+      }
+      checkboxes.forEach((checkbox,index) => {checkbox.addEventListener('click',Handlecheckbox)});
+    </script>
+
+
+</body>
+
+</html>
